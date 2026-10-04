@@ -1,8 +1,37 @@
 [gd_scene format=3 uid="uid://cd5c8uw5u7ei8"]
 
 [ext_resource type="PackedScene" uid="uid://t4ejp1ghmfcb" path="res://player.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://b4557crpj10ck" path="res://wall.tscn" id="2_0xm2m"]
 
 [node name="Main" type="Node2D" unique_id=2045774862]
 
 [node name="Player" parent="." unique_id=1056961213 instance=ExtResource("1_ig7tw")]
-position = Vector2(576, 324)
+position = Vector2(100, 100)
+
+[node name="Wall" parent="." unique_id=1256325163 instance=ExtResource("2_0xm2m")]
+position = Vector2(576, 16)
+size = Vector2(1152, 32)
+
+[node name="Wall2" parent="." unique_id=399558288 instance=ExtResource("2_0xm2m")]
+position = Vector2(576, 632)
+size = Vector2(1152, 32)
+
+[node name="Wall3" parent="." unique_id=231799914 instance=ExtResource("2_0xm2m")]
+position = Vector2(16, 324)
+size = Vector2(32, 648)
+
+[node name="Wall4" parent="." unique_id=753202568 instance=ExtResource("2_0xm2m")]
+position = Vector2(1136, 324)
+size = Vector2(32, 648)
+
+[node name="Wall5" parent="." unique_id=1334736099 instance=ExtResource("2_0xm2m")]
+position = Vector2(300, 200)
+size = Vector2(32, 336)
+
+[node name="Wall6" parent="." unique_id=405108432 instance=ExtResource("2_0xm2m")]
+position = Vector2(600, 448)
+size = Vector2(32, 336)
+
+[node name="Wall7" parent="." unique_id=1216628106 instance=ExtResource("2_0xm2m")]
+position = Vector2(760, 440)
+size = Vector2(320, 32)

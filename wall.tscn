@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://b4557crpj10ck"]
+
+[ext_resource type="Script" uid="uid://bbphvn0kpihqw" path="res://wall.gd" id="1_xxgf6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xxgf6"]
+
+[node name="Wall" type="StaticBody2D" unique_id=1256325163]
+script = ExtResource("1_xxgf6")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1502146091]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.41960785, 0.24705882, 0.11372549, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=915817148]
+shape = SubResource("RectangleShape2D_xxgf6")
