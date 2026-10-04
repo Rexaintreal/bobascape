@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @export var speed := 90.0
 @export var damage := 10
+@export var health := 30
 @export var detect_range := 350.0  
 
 var cooldown := 0.0 
@@ -9,6 +10,7 @@ var player: Node2D
 
 func _ready():
 	motion_mode = MOTION_MODE_FLOATING
+	add_to_group("enemy")
 	player = get_tree().get_first_node_in_group("player")
 
 func _physics_process(delta):
@@ -28,3 +30,10 @@ func _physics_process(delta):
 		if other.is_in_group("player") and cooldown <= 0.0:
 			other.take_damage(damage)
 			cooldown = 1.0
+
+func take_damage(amount):
+	health -= amount
+	modulate = Color(1, 1, 1, 0.3)
+	create_tween().tween_property(self, "modulate", Color.WHITE, 0.15)
+	if health <= 0:
+		queue_free()

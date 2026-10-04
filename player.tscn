@@ -2,15 +2,15 @@
 
 [ext_resource type="Texture2D" uid="uid://dmwggrcqwtp1j" path="res://assets/orpheus_front.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://c0pgmvekev6m5" path="res://player.gd" id="1_onrkg"]
-[ext_resource type="Texture2D" uid="uid://bcyvy1chklavj" path="res://assets/orpheus_back.png" id="3_i3pqv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jhtow"]
 size = Vector2(72, 105.5)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_jhtow"]
+radius = 50.0
+
 [node name="Player" type="CharacterBody2D" unique_id=1056961213]
 script = ExtResource("1_onrkg")
-front_texture = ExtResource("1_4flbx")
-back_texture = ExtResource("3_i3pqv")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=953641071]
 scale = Vector2(0.12, 0.12)
@@ -19,3 +19,8 @@ texture = ExtResource("1_4flbx")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=615874041]
 position = Vector2(1, -1.25)
 shape = SubResource("RectangleShape2D_jhtow")
+
+[node name="AttackArea" type="Area2D" parent="." unique_id=1998244976]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=608466557]
+shape = SubResource("CircleShape2D_jhtow")
