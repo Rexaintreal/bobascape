@@ -7,7 +7,6 @@ const ATTACK_DAMAGE = 10
 const ATTACK_COOLDOWN = 0.4
 
 @export var max_health := 100
-
 const FRONT_TEXTURE = preload("res://assets/orpheus_front.png")
 const BACK_TEXTURE = preload("res://assets/orpheus_back.png")
 
@@ -24,7 +23,7 @@ func _ready():
 	health = max_health
 
 func _physics_process(delta):
-	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	velocity = direction * SPEED
 	move_and_slide()
 
@@ -39,9 +38,8 @@ func _physics_process(delta):
 	if direction != Vector2.ZERO:
 		facing = direction.normalized()
 	attack_area.position = facing * 60
-
 	attack_timer -= delta
-	if Input.is_action_just_pressed("ui_accept") and attack_timer <= 0.0:
+	if Input.is_action_just_pressed("attack") and attack_timer <= 0.0:
 		attack()
 
 func attack():
