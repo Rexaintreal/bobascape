@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://b4557crpj10ck" path="res://wall.tscn" id="2_0xm2m"]
 [ext_resource type="Script" uid="uid://bfk07r0lla5xp" path="res://health_bar.gd" id="2_h2yge"]
 [ext_resource type="PackedScene" uid="uid://yq7fyr1fsxkw" path="res://enemy.tscn" id="3_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://dmmju1md0gr0b" path="res://boba.tscn" id="5_lquwl"]
 
 [node name="Main" type="Node2D" unique_id=2045774862]
 
@@ -49,3 +50,12 @@ size = Vector2(32, 336)
 [node name="Wall7" parent="." unique_id=1216628106 instance=ExtResource("2_0xm2m")]
 position = Vector2(760, 440)
 size = Vector2(320, 32)
+
+[node name="Boba" parent="." unique_id=1539505842 instance=ExtResource("5_lquwl")]
+position = Vector2(200, 450)
+
+[node name="Boba2" parent="." unique_id=2128080766 instance=ExtResource("5_lquwl")]
+position = Vector2(90, 150)
+
+[node name="Boba3" parent="." unique_id=1759089768 instance=ExtResource("5_lquwl")]
+position = Vector2(950, 580)
