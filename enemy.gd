@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal died(pos)
+
 @export var speed := 90.0
 @export var damage := 10
 @export var health := 30
@@ -49,4 +51,5 @@ func take_damage(amount, from_pos := Vector2.ZERO):
 	modulate = Color(1, 1, 1, 0.3)
 	create_tween().tween_property(self, "modulate", Color.WHITE, 0.15)
 	if health <= 0:
+		died.emit(global_position)
 		queue_free()

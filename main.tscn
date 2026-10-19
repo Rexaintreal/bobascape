@@ -1,12 +1,13 @@
 [gd_scene format=3 uid="uid://cd5c8uw5u7ei8"]
 
 [ext_resource type="PackedScene" uid="uid://t4ejp1ghmfcb" path="res://player.tscn" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://dcy6grj532rtw" path="res://main.gd" id="1_lquwl"]
 [ext_resource type="PackedScene" uid="uid://b4557crpj10ck" path="res://wall.tscn" id="2_0xm2m"]
 [ext_resource type="Script" uid="uid://bfk07r0lla5xp" path="res://health_bar.gd" id="2_h2yge"]
-[ext_resource type="PackedScene" uid="uid://yq7fyr1fsxkw" path="res://enemy.tscn" id="3_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dmmju1md0gr0b" path="res://boba.tscn" id="5_lquwl"]
 
 [node name="Main" type="Node2D" unique_id=2045774862]
+script = ExtResource("1_lquwl")
 
 [node name="Player" parent="." unique_id=1056961213 instance=ExtResource("1_ig7tw")]
 position = Vector2(100, 100)
@@ -20,8 +21,32 @@ offset_right = 320.0
 offset_bottom = 50.0
 script = ExtResource("2_h2yge")
 
-[node name="Enemy" parent="CanvasLayer" unique_id=1360470237 instance=ExtResource("3_1bvp3")]
-position = Vector2(900, 500)
+[node name="ScoreLabel" type="Label" parent="CanvasLayer" unique_id=797406952]
+offset_left = 340.0
+offset_top = 18.0
+offset_right = 580.0
+offset_bottom = 50.0
+theme_override_font_sizes/font_size = 24
+text = "Score: 0"
+
+[node name="WaveLabel" type="Label" parent="CanvasLayer" unique_id=1403304998]
+offset_left = 900.0
+offset_top = 18.0
+offset_right = 1130.0
+offset_bottom = 52.0
+theme_override_font_sizes/font_size = 24
+text = "Wave 1"
+horizontal_alignment = 2
+
+[node name="Message" type="Label" parent="CanvasLayer" unique_id=1658636813]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 48
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Wall" parent="." unique_id=1256325163 instance=ExtResource("2_0xm2m")]
 position = Vector2(576, 16)

@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 signal health_changed(new_health, max_health)
+signal died
 
 const SPEED = 200.0
 const DASH_SPEED = 650.0
@@ -21,6 +22,7 @@ var dash_cd := 0.0
 var dash_dir := Vector2.ZERO
 var invuln := 0.0
 var slash_t := 0.0
+var dead := false
 
 @onready var sprite = $Sprite2D
 @onready var attack_area = $AttackArea
@@ -31,6 +33,8 @@ func _ready():
 	health = max_health
 
 func _physics_process(delta):
+	if dead:
+		return
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var speed = SPEED
 
@@ -83,7 +87,7 @@ func attack():
 			body.take_damage(ATTACK_DAMAGE, global_position)
 
 func take_damage(amount):
-	if invuln > 0.0:
+	if invuln > 0.0 or dead:
 		return
 	invuln = 0.5
 	health = max(health - amount, 0)
@@ -91,7 +95,8 @@ func take_damage(amount):
 	sprite.modulate = Color(1, 0.3, 0.3)
 	create_tween().tween_property(sprite, "modulate", Color.WHITE, 0.3)
 	if health <= 0:
-		get_tree().call_deferred("reload_current_scene")
+		dead = true
+		died.emit()
 
 func heal(amount):
 	health = min(health + amount, max_health)
