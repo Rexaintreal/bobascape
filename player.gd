@@ -3,16 +3,22 @@ extends CharacterBody2D
 signal health_changed(new_health, max_health)
 
 const SPEED = 200.0
+const DASH_SPEED = 650.0
+const DASH_TIME = 0.15
+const DASH_COOLDOWN = 0.8
 const ATTACK_DAMAGE = 10
 const ATTACK_COOLDOWN = 0.4
-
-@export var max_health := 100
 const FRONT_TEXTURE = preload("res://assets/orpheus_front.png")
 const BACK_TEXTURE = preload("res://assets/orpheus_back.png")
+
+@export var max_health := 100
 
 var health := 100
 var facing := Vector2.DOWN
 var attack_timer := 0.0
+var dash_timer := 0.0
+var dash_cd := 0.0
+var dash_dir := Vector2.ZERO
 
 @onready var sprite = $Sprite2D
 @onready var attack_area = $AttackArea
@@ -24,7 +30,23 @@ func _ready():
 
 func _physics_process(delta):
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	velocity = direction * SPEED
+	var speed = SPEED
+
+	dash_timer -= delta
+	dash_cd -= delta
+	attack_timer -= delta
+
+	if Input.is_action_just_pressed("dash") and dash_cd <= 0.0:
+		dash_dir = direction if direction != Vector2.ZERO else facing
+		dash_timer = DASH_TIME
+		dash_cd = DASH_COOLDOWN
+		sprite.modulate = Color(1, 1, 1, 0.5)
+		create_tween().tween_property(sprite, "modulate", Color.WHITE, DASH_TIME + 0.1)
+
+	if dash_timer > 0.0:
+		velocity = dash_dir * DASH_SPEED
+	else:
+		velocity = direction * speed
 	move_and_slide()
 
 	if direction.y < 0:
@@ -38,9 +60,9 @@ func _physics_process(delta):
 	if direction != Vector2.ZERO:
 		facing = direction.normalized()
 	attack_area.position = facing * 60
-	attack_timer -= delta
 	if Input.is_action_just_pressed("attack") and attack_timer <= 0.0:
 		attack()
+
 
 func attack():
 	attack_timer = ATTACK_COOLDOWN
