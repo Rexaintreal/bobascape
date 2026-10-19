@@ -3,12 +3,14 @@ extends CharacterBody2D
 @export var speed := 90.0
 @export var damage := 10
 @export var health := 30
-@export var detect_range := 350.0 
+@export var detect_range := 350.0
 
-var cooldown := 0.0 
+var cooldown := 0.0
+var knock := Vector2.ZERO
 var player: Node2D
 
 @onready var health_bar = get_node_or_null("HealthBar")
+@onready var sprite = $Sprite2D
 
 func _ready():
 	motion_mode = MOTION_MODE_FLOATING
@@ -23,10 +25,12 @@ func _physics_process(delta):
 		return
 
 	var to_player = player.global_position - global_position
+	var chase = Vector2.ZERO
 	if to_player.length() < detect_range:
-		velocity = to_player.normalized() * speed
-	else:
-		velocity = Vector2.ZERO
+		chase = to_player.normalized() * speed
+		sprite.flip_h = to_player.x > 0
+	velocity = chase + knock
+	knock = knock.move_toward(Vector2.ZERO, 1400.0 * delta)
 	move_and_slide()
 
 	cooldown -= delta
@@ -36,10 +40,12 @@ func _physics_process(delta):
 			other.take_damage(damage)
 			cooldown = 1.0
 
-func take_damage(amount):
+func take_damage(amount, from_pos := Vector2.ZERO):
 	health -= amount
 	if health_bar != null:
 		health_bar.value = health
+	if from_pos != Vector2.ZERO:
+		knock = (global_position - from_pos).normalized() * 450.0
 	modulate = Color(1, 1, 1, 0.3)
 	create_tween().tween_property(self, "modulate", Color.WHITE, 0.15)
 	if health <= 0:
