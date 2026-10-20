@@ -2,7 +2,7 @@ extends Node2D
 
 @export var enemy_scene: PackedScene = preload("res://enemy.tscn")
 @export var boba_scene: PackedScene = preload("res://boba.tscn")
-@export var arena := Rect2(60, 60, 1030, 530)
+@export var arena := Rect2(60, 60, 1030, 530) # playable floor, inside the outer walls
 
 var score := 0
 var wave := 0
@@ -34,6 +34,7 @@ func _next_wave():
 	wave += 1
 	_update_ui()
 	message.text = "Wave %d" % wave
+	Sfx.play("wave")
 	_spawn_boba(_free_spot())
 	await get_tree().create_timer(1.5).timeout
 	message.text = ""
@@ -73,6 +74,7 @@ func _update_ui():
 func _on_player_died():
 	game_over = true
 	message.text = "GAME OVER\nScore: %d\nPress R to retry" % score
+	Sfx.play("gameover")
 
 func _free_spot() -> Vector2:
 	var space = get_world_2d().direct_space_state

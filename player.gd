@@ -52,6 +52,7 @@ func _physics_process(delta):
 		dash_timer = DASH_TIME
 		dash_cd = DASH_COOLDOWN
 		invuln = DASH_TIME + 0.1
+		Sfx.play("dash")
 		sprite.modulate = Color(1, 1, 1, 0.5)
 		create_tween().tween_property(sprite, "modulate", Color.WHITE, DASH_TIME + 0.1)
 
@@ -83,11 +84,16 @@ func _draw():
 func attack():
 	attack_timer = ATTACK_COOLDOWN * (0.6 if rush > 0.0 else 1.0)
 	slash_t = 0.15
+	Sfx.play("swing")
 	sprite.modulate = Color(1, 1, 0.4)
 	create_tween().tween_property(sprite, "modulate", Color.WHITE, 0.2)
+	var hit := false
 	for body in attack_area.get_overlapping_bodies():
 		if body.is_in_group("enemy"):
 			body.take_damage(ATTACK_DAMAGE, global_position)
+			hit = true
+	if hit:
+		Sfx.play("hit")
 
 func take_damage(amount):
 	if invuln > 0.0 or dead:
@@ -95,6 +101,7 @@ func take_damage(amount):
 	invuln = 0.5
 	health = max(health - amount, 0)
 	health_changed.emit(health, max_health)
+	Sfx.play("hurt")
 	sprite.modulate = Color(1, 0.3, 0.3)
 	create_tween().tween_property(sprite, "modulate", Color.WHITE, 0.3)
 	if health <= 0:

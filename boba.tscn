@@ -8,6 +8,7 @@ radius = 33.0
 
 [node name="Boba" type="Area2D" unique_id=1539505842]
 script = ExtResource("1_rfslc")
+heal_amount = null
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1516769379]
 scale = Vector2(0.3, 0.3)
