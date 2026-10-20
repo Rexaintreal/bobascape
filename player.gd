@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 signal health_changed(new_health, max_health)
 signal died
+signal boba_collected
 
 const SPEED = 200.0
 const DASH_SPEED = 650.0
@@ -22,6 +23,7 @@ var dash_cd := 0.0
 var dash_dir := Vector2.ZERO
 var invuln := 0.0
 var slash_t := 0.0
+var rush := 0.0
 var dead := false
 
 @onready var sprite = $Sprite2D
@@ -36,11 +38,12 @@ func _physics_process(delta):
 	if dead:
 		return
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	var speed = SPEED
+	var speed = SPEED * (1.4 if rush > 0.0 else 1.0)
 
 	dash_timer -= delta
 	dash_cd -= delta
 	invuln -= delta
+	rush -= delta
 	slash_t -= delta
 	attack_timer -= delta
 
@@ -78,7 +81,7 @@ func _draw():
 		draw_arc(Vector2.ZERO, 95.0, facing.angle() - 0.9, facing.angle() + 0.9, 16, Color(1, 0.85, 0.3, slash_t / 0.15), 10.0)
 
 func attack():
-	attack_timer = ATTACK_COOLDOWN
+	attack_timer = ATTACK_COOLDOWN * (0.6 if rush > 0.0 else 1.0)
 	slash_t = 0.15
 	sprite.modulate = Color(1, 1, 0.4)
 	create_tween().tween_property(sprite, "modulate", Color.WHITE, 0.2)
@@ -101,3 +104,8 @@ func take_damage(amount):
 func heal(amount):
 	health = min(health + amount, max_health)
 	health_changed.emit(health, max_health)
+
+func collect_boba(amount):
+	heal(amount)
+	rush = 5.0
+	boba_collected.emit()

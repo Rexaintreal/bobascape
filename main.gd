@@ -18,6 +18,7 @@ func _ready():
 	randomize()
 	message.text = ""
 	player.died.connect(_on_player_died)
+	player.boba_collected.connect(func(): _add_score(5))
 	_update_ui()
 
 func _process(_delta):

@@ -9,6 +9,6 @@ func _ready():
 	t.tween_property($Sprite2D, "position:y", 0.0, 0.6).set_trans(Tween.TRANS_SINE)
 
 func _on_body_entered(body):
-	if body.is_in_group("player") and body.health < body.max_health:
-		body.heal(heal_amount)
+	if body.is_in_group("player"):
+		body.collect_boba(heal_amount)
 		queue_free()
