@@ -1,8 +1,21 @@
-# Bobascape
+<p align="center">
+  <img src="images/BBLogoLKO.png" alt="Boba Bash Lucknow" width="200">
+</p>
 
-A top-down wave survival game made in Godot 4.7 Orpheus fights off waves of Daven dashes through danger and sips boba to heal and speed up hehehe.
+# Bobascape :3
+
+A top-down wave survival game made in Godot 4.7. Orpheus fights off waves of Daven, dashes through danger, and grabs boba to heal and speed up. hehe
 
 **Play it:** [https://saurabhcodesawfully.itch.io/bobascape]
+
+## Screenshots
+<p align="center">
+  <img src="images/image.png" width="45%">
+  <img src="images/image%20(1).png" width="45%">
+</p>
+<p align="center">
+  <img src="images/image%20(3).png" width="45%">
+</p>
 
 ## Controls
 - Move: [WASD / arrows]
@@ -22,7 +35,7 @@ A top-down wave survival game made in Godot 4.7 Orpheus fights off waves of Dave
 
 ## Credits
 Code and game design by Saurabh Tiwari. Art assets were generated with AI tools.
-Made for Boba Bash Lucknow by Hack Club.
+Made for Boba Bash Lucknow by Hack Club. :3
 
 ## License
 MIT
