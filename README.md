@@ -1,6 +1,6 @@
 # Bobascape
 
-A top-down wave survival game made in Godot 4.7. Orpheus fights off waves of Daven, dashes through danger, and grabs boba to heal and speed up.
+A top-down wave survival game made in Godot 4.7 Orpheus fights off waves of Daven dashes through danger and sips boba to heal and speed up hehehe.
 
 **Play it:** [https://saurabhcodesawfully.itch.io/bobascape]
 
